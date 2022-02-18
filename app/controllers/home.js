@@ -2,7 +2,7 @@
  * @Author: qianlong github:https://github.com/LINGyue-dot
  * @Date: 2022-02-17 20:54:34
  * @LastEditors: qianlong github:https://github.com/LINGyue-dot
- * @LastEditTime: 2022-02-18 01:15:09
+ * @LastEditTime: 2022-02-18 15:57:42
  * @Description:
  */
 // const { getHomeListModel } = require("../models/homeModel");
@@ -33,6 +33,19 @@ class Home {
 	async multipleFile(ctx, next) {
 		await next();
 
+		const urls = ctx.files.file.map(
+			file => `${CONFIG.RESOURCE_URL}/${file.originalname}`
+		);
+
+		ctx.body = new SuccessResponse({
+			urls,
+		});
+	}
+
+	// 文件夹
+
+	async directoryFile(ctx, next) {
+		await next();
 		const urls = ctx.files.file.map(
 			file => `${CONFIG.RESOURCE_URL}/${file.originalname}`
 		);
