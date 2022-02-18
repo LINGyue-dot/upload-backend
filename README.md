@@ -47,7 +47,41 @@
 
 ### 后端
 
+需要将分隔符转义回对应系统的分隔符
 
+
+
+
+
+
+
+## 拖拽上传
+
+拖拽上传主要工作在于前端的拖拽事件处理，前端传递文件给后端
+
+### 前端
+
+对容器监听4个事件
+
+```js
+       @dragenter.prevent.stop="dragenter"  // 高亮容器，
+       @dragover.prevent.stop="dragover" // 高亮容器，
+       @dragleave.prevent.stop="dragleave"
+       @drop.prevent.stop="drop"
+```
+
+在  `drop` 事件中可以拿到拖拽的数据
+
+```js
+// 图片预览
+const drop = (e: DragEvent) => {
+  const dt = e.dataTransfer // 
+  const files = [...dt.files] // 拖拽的文件
+  files.forEach((file) => {
+    previewImage(file, areaRef.value)
+  })
+}
+```
 
 
 
